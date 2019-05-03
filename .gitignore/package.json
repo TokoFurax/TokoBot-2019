@@ -1,0 +1,16 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "cool",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "lowdb": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "_aide"
+  },
+  "author": "TokoKaira",
+  "license": "ISC"
+}
