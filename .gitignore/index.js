@@ -54,8 +54,6 @@ myBot.on('message', message => {
        .addField('📎 "_myAvatar"',"permet d'obtenir l'image de son compte Discord")
        .addField('📎 "_avatar"',"permet d'obtenir l'image du compte Discord de quelqu'un: _avatar @+nom de la personne")
        .addField('📎 "_infos"',"permet d'obtenir les infos du compte Discord de quelqu'un: _infos @+nom de la personne")
-       .addField('📎 "_xp"',"permet de voir votre xp dans le serveur")
-       .addField('📎 "_ping"',"permet de voir sa vitesse de connexion")
 
        message.channel.send({embed: embed});
        console.log("_Aide Menu_ " + "utilisé par " + message.author.username);
@@ -78,8 +76,6 @@ myBot.on('message', message => {
        .addField('🔒 "_admin"',"permet d'obtenir la liste des commandes de modération")
        .addField('📎 "_myAvatar"',"permet d'obtenir l'image de son compte Discord")
        .addField('📎 "_infos"',"permet d'obtenir les infos du compte Discord de quelqu'un: _infos @+nom de la personne")
-       .addField('📎 "_xp"',"permet de voir votre xp dans le serveur")
-       .addField('📎 "_ping"',"permet de voir sa vitesse de connexion")
 
        message.channel.send({embed: embed});
        console.log("_Aide Menu_ " + "utilisé par " + message.author.username);
