@@ -1,11 +1,4 @@
 const Discord = require('discord.js');
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-
-const adapter = new FileSync('database.json');
-const db = low(adapter);
-
-db.defaults({histoire: [], xp: []}).write()
 
 var myBot = new Discord.Client();
 var prefix = "_";
@@ -18,6 +11,7 @@ myBot.setInterval;
         `TokoKaira#6316`,
         `https://discord.gg/22ExKzM`,
         `Team [A-H]`
+        `Connecté sur ${myBot.guilds.size} serveurs`
     ]
     setInterval(function() {
         let status = statuses[Math.floor(Math.random() * statuses.length)];
@@ -603,28 +597,6 @@ myBot.on("message", message => {
       msg.guild.leave().catch(e => {});
 }});
 
-//KOD_MARKET
-myBot.on("message", message => {
-    if (message.content === '_market') {
-        const embed = new Discord.RichEmbed();
-        embed.setTitle("**Le Market**")
-        .setAuthor('[TOKO] TokoFurax', 'https://i.imgur.com/iGQr5W6.png')
-        .setColor(3447003)
-        .setDescription('les bots:')
-        .setThumbnail('https://i.imgur.com/VrfFDRZ.jpg')
-        .setTimestamp()
-        .setFooter('Par </KOD2TOU>')
- 
-        embed.addField('🌴 Bot de BAN: 2500 KODollards',"permet de *BAN*  un utilisateur")
-        .addField('🌵 Bot de KICK: 2500 KODollards',"permet de *KICK*  un utilisateur")
-        .addField('🎨 Bot de CLEAN: 3000 KODollards',"permet de *NETOYER*  le chat (jusqu'à 100 messages à la fois)")
-        .addField('📣 Bot de MUTE: 3500 KODollards',"permet de *DESACTIVER*  les messages d'un utilisateur")
-        .addField('🔊 Bot de UNMUTE: 3500 KODollards',"permet de *REACTIVER*  les messages d'un utilisateur")
-
-        message.channel.send({embed: embed});
-        console.log("_MARKET OUVERT_ " + "par " + message.author.username);
-     }
-});
 //Bienvenue
 myBot.on("guildMemberAdd", member => {
     member.guild.channels.find("name", '👋bienvenue').send(` ${member.user.username}, 🎸**bienvenue**🎸 sur le serveur, n'hesite pas à 🍻**ramener des potes**🍻 et à *discuter avec le staff*`)
@@ -634,40 +606,6 @@ myBot.on("guildMemberAdd", member => {
 myBot.on("guildMemberRemove", member => {
     member.guild.channels.find("name", '👋aurevoir').send(`😢C'est triste mais ${member.user.username} vien de quitter le serveur`)
 });
-
-//XP
-myBot.on('message', message => {
-    var msgauthor = message.author.id;
-
-    if(message.author.myBot)return;
-
-    if(!db.get('xp').find({user: msgauthor}).value()){
-        db.get('xp').push({user: msgauthor, xp: 1}).write();
-    }else{
-        var userxpdb = db.get('xp').filter({user: msgauthor}).find('xp').value();
-        console.log(userxpdb);
-        var userxp = Object.values(userxpdb)
-        console.log(userxp)
-        console.log(`Nombre d'xp : ${userxp[1]}`)
-
-        db.get('xp').find({user: msgauthor}).assign({user: msgauthor, xp: userxp[1] += 1}).write();
-
-    
-    if (message.content === prefix + 'xp'){
-        var xp = db.get('xp').filter({user: msgauthor}).find('xp').value()
-        var xpfinal = Object.values(xp);
- 
-        var xp_embed = new Discord.RichEmbed()
-            .setTitle(`Stat de l'XP de ${message.author.username}`)
-            .setColor(3447003)
-            .setDescription("Affichage de l'XP")
-            .addField('XP:', `${xpfinal[1]} xp`)
-            .setFooter('😂 xDD')
-        message.channel.send({embed: xp_embed});
-    }
-  }
-});
-
 //Personnes vérif
 myBot.on('message', message => {
     if (message.content.startsWith('_infos')) {
@@ -697,23 +635,5 @@ myBot.on('message', message => {
         
                 message.channel.send({embed: embed});
                 console.log(`Les infos de ${autheur.username} ont été consulté ` + "par " + message.author.username);
-        }
-});
-//Test de Ping
-myBot.on('message', message => {
-    if (message.content === '_ping') {
-      const embed = new Discord.RichEmbed();
-      embed.setTitle(`Le résumé de ${autheur.username}`)
-      .setAuthor(myBot.username, myBot.avatarURL)
-      .setColor(3447003)
-                .setDescription('le ping')
-                .setThumbnail(autheur.avatarURL)
-                .setTimestamp()
-                .setFooter('Par TokoKaira')
-         
-                embed.addField('Pong', 'Résultat en dessous')
-        
-                message.channel.send({embed: embed});
-                console.log(`Le ping de ${autheur.username}`);
         }
 });
