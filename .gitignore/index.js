@@ -4,7 +4,7 @@ var myBot = new Discord.Client();
 var prefix = "_";
 
 myBot.on("ready", () => {
-    myBot._setPresence("_aide | Team [A-H]");
+    myBot.setPresence("_aide | Team [A-H]");
     console.log(`[LOGS] Connecté sur ${myBot.guilds.size} serveurs`);
 })
 myBot.login(process.env.TOKEN);
