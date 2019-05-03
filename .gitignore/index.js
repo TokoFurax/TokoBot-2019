@@ -4,20 +4,7 @@ var myBot = new Discord.Client();
 var prefix = "_";
 
 myBot.on("ready", () => {
-myBot.setInterval;
-    let statuses = [
-        `Liberté Toko`,
-        `_aide | _help`,
-        `TokoKaira#6316`,
-        `https://discord.gg/22ExKzM`,
-        `Team [A-H]`
-        `Connecté sur ${myBot.guilds.size} serveurs`
-    ]
-    setInterval(function() {
-        let status = statuses[Math.floor(Math.random() * statuses.length)];
-        bot.user.setActivity(status, {type: "STREAMING", url: "https://www.twitch.tv/Strandable"})
-    }, 5000)
-    console.log("Bot en route pour l'Olympe");
+    myBot._setPresence("_aide | Team [A-H]");
     console.log(`[LOGS] Connecté sur ${myBot.guilds.size} serveurs`);
 })
 myBot.login(process.env.TOKEN);
