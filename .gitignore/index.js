@@ -21,13 +21,6 @@ myBot.on('message', message => {
     })
 }
 });
-myBot.on('message', message => {
-    if (message.content === "!p https://youtu.be/Ri7GzCUTC5s")) {
-    
-        message.channel.send("!skip");
-        message.channel.send("!skip");
-}
-});
 //Aide
 myBot.on('message', message => {
     if (message.content === prefix + 'aide'){
