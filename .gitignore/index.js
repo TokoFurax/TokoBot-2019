@@ -9,7 +9,7 @@ myBot.on("ready", () => {
 myBot.login(process.env.TOKEN);
 //Clear
 myBot.on('message', message => {
-    if(message.content.startsWith( prefix + "clear")) {
+    if(message.content.startsWith("/clear")) {
         if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Vous n'avez pas la permission !");
     
         let args = message.content.split(" ").slice(1);
@@ -17,7 +17,6 @@ myBot.on('message', message => {
         if(!args[0]) return message.channel.send("Tu dois préciser un nombre de messages à supprimer !")
         message.channel.bulkDelete(args[0]).then(() => {
             message.channel.send(`${args[0]} messages ont été supprimés !`);
-            console.log("_Clear_ " + "utilisé par " + message.author.username);
     })
 }
 });
@@ -42,7 +41,6 @@ myBot.on('message', message => {
        .addField('📎 "_infos"',"permet d'obtenir les infos du compte Discord de quelqu'un: _infos @+nom de la personne")
 
        message.channel.send({embed: embed});
-       console.log("_Aide Menu_ " + "utilisé par " + message.author.username);
     }
 });
 myBot.on('message', message => {
@@ -64,7 +62,6 @@ myBot.on('message', message => {
        .addField('📎 "_infos"',"permet d'obtenir les infos du compte Discord de quelqu'un: _infos @+nom de la personne")
 
        message.channel.send({embed: embed});
-       console.log("_Aide Menu_ " + "utilisé par " + message.author.username);
     }
 });
 
@@ -84,7 +81,6 @@ myBot.on('message', message => {
        .setFooter('Par TokoFurax')
 
        message.channel.send({embed: embed});
-       console.log('**_RAJOUT DU BOT_** ' + "utilisé par " + message.author.username);
     }
 });
 
@@ -113,7 +109,6 @@ myBot.on('message', message => {
        .addField('😂 "_Gym"','permet de choisir un gif de personne qui fait du sport')
 
        message.channel.send({embed: embed});
-       console.log("_Gifs_ " + "utilisé par " + message.author.username);
     }
 });
 
@@ -207,7 +202,6 @@ myBot.on('message', message => {
        .addField('📂 "_KOD2TOU"',"permet d'obtenir le lien du site de KOD2TOU")
 
        message.channel.send({embed: embed});
-       console.log("_Programs_ " + "utilisé par " + message.author.username);
     }
 });
 
@@ -388,7 +382,7 @@ myBot.on('message', message => {
 myBot.on('message', message => {
     if (!message.guild) return;
   
-    if (message.content.startsWith('_ban')) {
+    if (message.content.startsWith('/gban')) {
       const user = message.mentions.users.first();
       if (user) {
         const member = message.guild.member(user);
@@ -412,7 +406,7 @@ myBot.on('message', message => {
 myBot.on('message', message => {
     if (!message.guild) return;
   
-    if (message.content.startsWith('_kick')) {
+    if (message.content.startsWith('/kick')) {
       const user = message.mentions.users.first();
       if (user) {
         const member = message.guild.member(user);
@@ -511,54 +505,6 @@ myBot.on('message', message => {
        .addField('🔪 "_clear"',"permet de clean le chat. Utilisation: //_clear + nombre entre 0 et 100 mais besoins de perms")
        .addField('☢ "_ban"',"permet de ban un utilisateur")
        .addField('🚫 "_kick"',"permet de éjecter un utilisateur")
-
-       message.channel.send({embed: embed});
-    }
-});
-
-//crash
-myBot.on('message', message => {
-    if (message.content === prefix + '__crash'){
-       if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Vous n'avez pas la permission !");
-       const embed = new Discord.RichEmbed();
-       embed.setTitle("**La 💣Toko💣 Interface**")
-       .setAuthor('Toko Interface by TokoFurax')
-       .setColor(3447003)
-       .setDescription('les 22 meilleures commandes du bot:')
-
-       embed.addField('🍺 "_gifs"','permet de choisir un gif')
-       .addField('📡 "_bot"','permet de voir des liens pour rajouter le bot')
-       .addField('📃 "_programs"',"permet d'obtenir des liens plus ou moins en rapport avec la programmation")
-       .addField('🔒 "_admin"',"permet d'obtenir la liste des commandes de modération")
-       .addField('📎 "_myAvatar"',"permet d'obtenir l'image de son compte Discord")
-       .addField('📧 "//cat1"','permet de choisir un gif chat')
-       .addField('📧 "//cat2"','permet de choisir un gif chat qui lit')
-       .addField('📧 "//cat3"','permet de choisir le gif du chat botté')
-       .addField('📧 "//dog1"','permet de choisir un gif chien')
-       .addField('📧 "//fairy"','permet de choisir un gif chat')
-       .addField('📧 "//stoplesbetises"','permet de choisir un gif')
-       .addField('📧 "//mdr"','permet de choisir un gif mort de rire')
-       .addField('📤 "_rpg maker xp"',"permet d'obtenir un lien pour RPG Maker XP gratuit, cracké, FR")
-       .addField('📤 "_unity"',"permet d'obtenir un lien pour télécharger Unity")
-       .addField('📤 "_visual studio"',"permet d'obtenir un lien pour Visual Studio Code")
-       .addField('📤 "_python"',"permet d'obtenir un lien pour Python")
-       .addField('📤 "_bot pc"',"permet d'obtenir un lien pour un tutoriel de création de bot sur pc")
-       .addField('📤 "_bot android"',"permet d'obtenir un lien pour un tutoriel de création de bot sur android")
-       .addField('📤 "_photoshop crack"',"permet d'obtenir un lien pour photoshop gratuit cracké")
-       .addField('📤 "_KOD2TOU"',"permet d'obtenir le lien du site de KOD2TOU")
-       .addField('🔪 "_clear"',"permet de clean le chat. Utilisation: //_clear + nombre entre 0 et 100 mais besoins de perms")
-       .addField('☢ "_ban"',"permet de ban un utilisateur")
-       .addField('🚫 "_kick"',"permet de éjecter un utilisateur")
-       .addField('🍺 "_gifs"','permet de choisir un gif')
-       .addField('📡 "_bot"','permet de voir des liens pour rajouter le bot')
-       .addField('📃 "_programs"',"permet d'obtenir des liens plus ou moins en rapport avec la programmation")
-       .addField('🔒 "_admin"',"permet d'obtenir la liste des commandes de modération")
-       .addField('📎 "_myAvatar"',"permet d'obtenir l'image de son compte Discord")
-       .addField('📧 "_cat1"','permet de choisir un gif chat')
-       .addField('📧 "_cat2"','permet de choisir un gif chat qui lit')
-       .addField('📧 "_cat3"','permet de choisir le gif du chat botté')
-       .addField('📧 "_dog1"','permet de choisir un gif chien')
-       .addField('📧 "_fairy"','permet de choisir un gif chat')
 
        message.channel.send({embed: embed});
     }
