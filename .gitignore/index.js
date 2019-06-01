@@ -1,47 +1,23 @@
 const Discord = require('discord.js');
 
 var myBot = new Discord.Client();
-var prefix = "_";
+var prefix = "/";
 
 myBot.on("ready", () => {
     console.log(`[LOGS] Connecté sur ${myBot.guilds.size} serveurs`);
 })
 myBot.login(process.env.TOKEN);
-//Clear
 myBot.on('message', message => {
     if(message.content.startsWith("/clear")) {
-        if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Vous n'avez pas la permission !");
+        if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Tu n'as pas la permission, car tu as un grade insuffisant sur ce serveur!");
     
         let args = message.content.split(" ").slice(1);
     
-        if(!args[0]) return message.channel.send("Tu dois préciser un nombre de messages à supprimer !")
+        if(!args[0]) return message.channel.send("Tu dois préciser un nombre de messages à supprimer, imbécile !")
         message.channel.bulkDelete(args[0]).then(() => {
-            message.channel.send(`${args[0]} messages ont été supprimés !`);
+            message.channel.send(`${args[0]} messages ont été supprimés, seigneur !`);
     })
 }
-});
-//Aide
-myBot.on('message', message => {
-    if (message.content === prefix + 'aide'){
-       const embed = new Discord.RichEmbed();
-       embed.setTitle("**Les catégories d'Aides**")
-       .setAuthor(myBot.user.username, myBot.user.avatarURL)
-       .setColor(3447003)
-       .setDescription('Plusieurs commandes plus ou moins cools et utiles:')
-       .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
-       .setTimestamp()
-       .setFooter('Par TokoFurax')
-
-       embed.addField('🍺 "_gifs"','permet de choisir un gif')
-       .addField('📡 "_bot"','permet de voir des liens pour rajouter le bot')
-       .addField('📃 "_programs"',"permet d'obtenir des liens plus ou moins en rapport avec la programmation")
-       .addField('🔒 "_admin"',"permet d'obtenir la liste des commandes de modération")
-       .addField('📎 "_myAvatar"',"permet d'obtenir l'image de son compte Discord")
-       .addField('📎 "_avatar"',"permet d'obtenir l'image du compte Discord de quelqu'un: _avatar @+nom de la personne")
-       .addField('📎 "_infos"',"permet d'obtenir les infos du compte Discord de quelqu'un: _infos @+nom de la personne")
-
-       message.channel.send({embed: embed});
-    }
 });
 myBot.on('message', message => {
     if (message.content === prefix + 'help'){
@@ -52,20 +28,17 @@ myBot.on('message', message => {
        .setDescription('Plusieurs commandes plus ou moins cools et utiles:')
        .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
        .setTimestamp()
-       .setFooter('Par TokoFurax')
+       .setFooter('Par Toko')
 
-       embed.addField('🍺 "_gifs"','permet de choisir un gif')
-       .addField('📡 "_bot"','permet de voir des liens pour rajouter le bot')
-       .addField('📃 "_programs"',"permet d'obtenir des liens plus ou moins en rapport avec la programmation")
-       .addField('🔒 "_admin"',"permet d'obtenir la liste des commandes de modération")
-       .addField('📎 "_myAvatar"',"permet d'obtenir l'image de son compte Discord")
-       .addField('📎 "_infos"',"permet d'obtenir les infos du compte Discord de quelqu'un: _infos @+nom de la personne")
+       embed.addField('🍺 "/gifs"','permet de choisir un gif')
+       .addField('📡 "/infobot"','permet de voir des liens pour rajouter le bot')
+       .addField('🔒 "/admin"',"permet d'obtenir la liste des commandes de modération")
+       .addField('📎 "/avatar"',"permet d'obtenir l'image de son compte Discord")
+       .addField('📎 "/infos"',"permet d'obtenir les infos du compte Discord de quelqu'un: /infos @+nom de la personne")
 
        message.channel.send({embed: embed});
     }
 });
-
-//Rajout du Bot
 myBot.on('message', message => {
     if (message.content === prefix + 'bot'){
        const embed = new Discord.RichEmbed();
@@ -78,13 +51,11 @@ myBot.on('message', message => {
        .addField('🏰 Me faire visiter ton serveur', 'https://discordapp.com/oauth2/authorize?client_id=559808523782062111&permissions=8&scope=bot')
        .setAuthor(myBot.user.username, myBot.user.avatarURL)
        .setDescription('*Je souhaiterai visiter des serveurs, aidez moi PLEASE:*')
-       .setFooter('Par TokoFurax')
+       .setFooter('Par Toko')
 
        message.channel.send({embed: embed});
     }
 });
-
-//Gifs
 myBot.on('message', message => {
     if (message.content === prefix + 'gifs'){
        const embed = new Discord.RichEmbed();
@@ -94,25 +65,25 @@ myBot.on('message', message => {
        .setDescription('les gifs:')
        .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
        .setTimestamp()
-       .setFooter('Par TokoFurax')
+       .setFooter('Par Toko')
 
-       embed.addField('🍸 "_cat1"','permet de choisir un gif chat')
-       .addField('📖 "_cat2"','permet de choisir un gif chat qui lit')
-       .addField('🎻 "_cat3"','permet de choisir le gif du chat botté')
-       .addField('🍯 "_dog1"','permet de choisir un gif chien')
-       .addField('⛲ "_fairy"','permet de choisir un gif chat')
-       .addField('😱 "_stoplesbetises"','permet de choisir un gif')
-       .addField('😂 "_mdr"','permet de choisir un gif mort de rire')
-       .addField('🍯 "_cat4"','permet de choisir un gif chat')
-       .addField('⛲ "_fruit"','permet de choisir un gif de pomme')
-       .addField('😱 "_homer simpson"','permet de choisir un gif de Homer')
-       .addField('😂 "_Gym"','permet de choisir un gif de personne qui fait du sport')
+       embed.addField('🍸 "/cat1"','permet de choisir un gif chat')
+       .addField('📖 "/cat2"','permet de choisir un gif chat qui lit')
+       .addField('🎻 "/cat3"','permet de choisir le gif du chat botté')
+       .addField('🍯 "/dog1"','permet de choisir un gif chien')
+       .addField('⛲ "/fairy"','permet de choisir un gif chat')
+       .addField('😱 "/stoplesbetises"','permet de choisir un gif')
+       .addField('😂 "/mdr"','permet de choisir un gif mort de rire')
+       .addField('🍯 "/cat4"','permet de choisir un gif chat')
+       .addField('⛲ "/fruit"','permet de choisir un gif de pomme')
+       .addField('😱 "/homer simpson"','permet de choisir un gif de Homer')
+       .addField('😂 "/Gym"','permet de choisir un gif de personne qui fait du sport')
+       .addField('😂 "/donnuts"','"homer ne trouve pas un donnut"')
+       .addField('😱 "/ohhh"','"un mignon trouve du lapis"')
 
        message.channel.send({embed: embed});
     }
 });
-
-//Gifs Commandes
 myBot.on('message', data => {
     if (data.content === prefix + 'cat1'){
     data.channel.send('https://i.giphy.com/media/F0eb5L2xJJJNC/giphy.webp');
@@ -180,148 +151,25 @@ myBot.on('message', data => {
     console.log("_Gym_");
 }
 });
-
-//Programs
-myBot.on('message', message => {
-    if (message.content === prefix + 'programs'){
-       const embed = new Discord.RichEmbed();
-       embed.setTitle("**La catégorie programs**")
-       .setAuthor(myBot.user.username, myBot.user.avatarURL)
-       .setColor(3447003)
-       .setDescription('les liens:')
-       .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
-       .setTimestamp()
-       .setFooter('Par TokoFurax')
-
-       embed.addField('💿 "_rpg maker xp"',"permet d'obtenir un lien pour RPG Maker XP gratuit, cracké, FR")
-       .addField('📀 "_unity"',"permet d'obtenir un lien pour télécharger Unity")
-       .addField('📝 "_visual studio"',"permet d'obtenir un lien pour Visual Studio Code")
-       .addField('🎨 "_python"',"permet d'obtenir un lien pour Python")
-       .addField('😂 "_bot pc"',"permet d'obtenir un lien pour un tutoriel de création de bot sur pc")
-       .addField('😎 "_bot android"',"permet d'obtenir un lien pour un tutoriel de création de bot sur android")
-       .addField('📂 "_KOD2TOU"',"permet d'obtenir le lien du site de KOD2TOU")
-
-       message.channel.send({embed: embed});
-    }
+myBot.on('message', data => {
+    if (data.content === prefix + 'donnuts'){
+    data.channel.send('https://media3.giphy.com/media/kEKcOWl8RMLde/giphy.gif');
+    console.log("_Donnut_");
+}
 });
-
-//Programs Commandes
-myBot.on('message', message => {
-    if (message.content === prefix + 'rpg maker xp'){
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3456723)
-       .setTitle('**RPG Maker XP Crack**')
-       .setImage('http://d289qh4hsbjjw7.cloudfront.net/rpgmaker-20130522223546811/files/wallpaper-rpg-maker-xp-type-a.jpg')
-       .setTimestamp()
-       .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
-       .addField('RPG Maker XP lien 1', 'http://www.final-rpg.com/rpg_maker_xp-telecharger-installation.html')
-       .addField('RPG Maker XP lien 2', 'http://www.mediafire.com/file/fzl5rz6asgj1ppk/rpg_maker_xp.rar')
-       .setAuthor(myBot.user.username, myBot.user.avatarURL)
-       .setDescription('les liens pour télécharger RPG Maker xp en crack fr (il faut télécharger les deux)')
-       .setFooter('Par TokoFurax')
-
-       message.channel.send({embed: embed});
-       console.log("_RPG Maker XP_ " + "utilisé par " + message.author.username);
-    }
+myBot.on('message', data => {
+    if (data.content === prefix + 'ohhh'){
+    data.channel.send('http://karinedreamsgraphic.k.a.pic.centerblog.net/Minions-Gif-pic1.gif');
+    console.log("_ohhhhh_");
+}
 });
-myBot.on('message', message => {
-    if (message.content === prefix + 'unity'){
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3456723)
-       .setTitle('**Unity**')
-       .setImage('https://udemy-images.udemy.com/course/750x422/1210008_6859.jpg')
-       .setTimestamp()
-       .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
-       .addField('Unity', 'https://store.unity.com/download?ref=personal')
-       .setAuthor(myBot.user.username, myBot.user.avatarURL)
-       .setDescription('le lien pour télécharger Unity')
-       .setFooter('Par TokoFurax')
-
-       message.channel.send({embed: embed});
-       console.log("_Unity_ " + "utilisé par " + message.author.username);
-    }
+myBot.on('message', data => {
+    if (data.content === prefix + 'gif ban'){
+    data.channel.send('https://i.imgur.com/O3DHIA5.gif');
+    data.channel.send("houla le BAN est proche!!!")
+    console.log("_ban proche_");
+}
 });
-myBot.on('message', message => {
-    if (message.content === prefix + 'KOD2TOU'){
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3456723)
-       .setTitle('**KOD2TOU**')
-       .setImage('https://image.jimcdn.com/app/cms/image/transf/dimension=287x10000:format=jpg/path/s2dfa13bdc82322ff/image/iaf03515eaaf7bcd1/version/1552065221/image.jpg')
-       .setTimestamp()
-       .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
-       .addField('Le site', 'http://kod2tou.cf')
-       .setAuthor(myBot.user.username, myBot.user.avatarURL)
-       .setDescription('le lien pour visiter notre site internet (la majoritée des liens y sont téléchargeablent)')
-       .setFooter('Par TokoFurax')
-
-       message.channel.send({embed: embed});
-       console.log("_KOD2TOU_ " + "utilisé par " + message.author.username);
-    }
-});
-myBot.on('message', message => {
-    if (message.content === prefix + 'bot pc'){
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3486023)
-       .setTitle('**Créer un bot sur PC**')
-       .setDescription("lien d'une vidéo sur comment créer un bot sur PC")
-       .addField('Lien de la vidéo', 'https://www.youtube.com/watch?v=FMijzVzh4MQ&t=1s')
-       .setImage('https://i.pinimg.com/564x/a1/6e/a7/a16ea7fa2bf36211e03461d9194ebefa.jpg')
-       .setTimestamp()
-
-       message.channel.send({embed: embed});
-       console.log("_Bot PC_ " + "utilisé par " + message.author.username);
-    }
-});
-myBot.on('message', message => {
-    if (message.content === prefix + 'bot android'){
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3486023)
-       .setTitle('**Créer un bot sous Android**')
-       .setDescription("lien d'une vidéo sur comment créer un bot sous android")
-       .addField('Lien de la vidéo', 'https://www.youtube.com/watch?v=XkIBT1ONfOc')
-       .setImage('https://i.pinimg.com/564x/1e/75/6f/1e756fe2b578ce50b21fe0324eeb92d1.jpg')
-       .setTimestamp()
-
-       message.channel.send({embed: embed});
-       console.log("_Bot Android_ " + "utilisé par " + message.author.username);
-    }
-});
-myBot.on('message', message => {
-    if (message.content === prefix + 'python'){
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3456723)
-       .setTitle('**Python**')
-       .setImage('https://static.oc-static.com/prod/courses/illustrations/illu_apprenez-a-programmer-en-python.png')
-       .setTimestamp()
-       .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
-       .addField('Télécharger Python', 'https://www.python.org/downloads/')
-       .setAuthor(myBot.user.username, myBot.user.avatarURL)
-       .setDescription('le lien pour télécharger Python')
-       .setFooter('Par TokoFurax')
-
-       message.channel.send({embed: embed});
-       console.log("_Python_ " + "utilisé par " + message.author.username);
-    }
-});
-myBot.on('message', message => {
-    if (message.content === prefix + 'visual studio'){
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3456723)
-       .setTitle('**Visual Sudio Code**')
-       .setImage('https://miro.medium.com/max/910/0*vyFBOV8lCa-22XvM.png')
-       .setTimestamp()
-       .setThumbnail('https://images-ext-2.discordapp.net/external/Jhx1PMJn8pFxgtl4xq_BdoYDXohpTa0F1DiUvrylaLM/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/554208450884665346/80ab9a8bc27d25070d94f6b8ba9295de.png?width=473&height=473')
-       .addField('Télécharger Visual Studio Code', 'https://code.visualstudio.com/')
-       .setAuthor(myBot.user.username, myBot.user.avatarURL)
-       .setDescription('le lien pour télécharger Visual Studio Code')
-       .setFooter('Par TokoFurax')
-
-       message.channel.send({embed: embed});
-       console.log("_Visual Studio Code_ " + "utilisé par " + message.author.username);
-    }
-});
-
-//Admin
 myBot.on('message', message => {
     if (message.content === prefix + 'admin'){
        if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Vous n'avez pas la permission !");
@@ -334,49 +182,12 @@ myBot.on('message', message => {
        .setTimestamp()
        .setFooter('Par TokoFurax')
 
-       embed.addField('🔪 "_clear"',"permet de clean le chat. Utilisation: //_clear + nombre entre 0 et 100 mais besoins de perms")
-       .addField('🍸 "_TokoFurax"',"permet d'afficher l'image de profil de TokoFurax")
-       .addField('🍸 "_INFINITI"',"permet d'afficher l'image de profil de INFINITY")
-       .addField('🍸 "_Humanoïde.exe"',"permet d'afficher l'image de profil de humanoïde.exe")
-       .addField('☢ "_ban"',"permet de ban un utilisateur")
-       .addField('🚫 "_kick"',"permet de éjecter un utilisateur")
-       .addField('🔒 "_exitserv"',"permet de éjecter le bot du serveur (par exemple en cas de RAID)")
+       embed.addField('🔪 "/clear"',"permet de clean le chat. Utilisation: //_clear + nombre entre 0 et 100 mais besoins de perms")
+       .addField('☢ "/gban"',"permet de ban un utilisateur")
+       .addField('🚫 "/kick"',"permet de éjecter un utilisateur")
 
        message.channel.send({embed: embed});
        console.log("_ADMIN_ " + "utilisé par " + message.author.username);
-    }
-});
-myBot.on('message', message => {
-    if (message.content === prefix + 'TokoFurax'){
-       if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Vous n'avez pas la permission !");
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3446023)
-       .setImage('https://cdn.discordapp.com/attachments/555377771577081857/555378797365428224/big-4538792063.jpg')
-
-       message.channel.send({embed: embed});
-       console.log("_TokoFurax_ " + "utilisé par " + message.author.username);
-    }
-});
-myBot.on('message', message => {
-    if (message.content === prefix + 'INFINITY'){
-       if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Vous n'avez pas la permission !");
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3446023)
-       .setImage('https://cdn.discordapp.com/attachments/555377771577081857/556737543027163146/d15bc3554e226e4c95f296ebb3592a97.png')
-
-       message.channel.send({embed: embed});
-       console.log("_INFINITY_ " + "utilisé par " + message.author.username);
-    }
-});
-myBot.on('message', message => {
-    if (message.content === prefix + 'Humanoïde.exe'){
-       if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Vous n'avez pas la permission !");
-       const embed = new Discord.RichEmbed();
-       embed.setColor(3446023)
-       .setImage('https://cdn.discordapp.com/attachments/555377771577081857/556737546944512010/1427bbc5e7d521e27679f60d38499acc.png')
-
-       message.channel.send({embed: embed});
-       console.log("_humanoïde.exe_ " + "utilisé par " + message.author.username);
     }
 });
 myBot.on('message', message => {
@@ -392,14 +203,14 @@ myBot.on('message', message => {
           }).then(() => {
             message.reply(`BAN réussi: ${user.tag}`);
           }).catch(err => {
-            message.reply('Je ne suis pas capable de ban cet utilisateur');
+            message.reply('Je ne suis pas capable de ban cet utilisateur, débile met moi + de perms');
             console.error(err);
           });
         } else {
-          message.reply("Cet utilisateur n'est pas dans le serveur!");
+          message.reply("Cet utilisateur n'est pas dans le serveur, débile!");
         }
       } else {
-        message.reply("Tu n'as pas le role suffisant pour BAN un utilisateur!");
+        message.reply("Tu n'as pas le role suffisant pour BAN un utilisateur, débile!");
       }
     }
 });
@@ -425,20 +236,8 @@ myBot.on('message', message => {
       }
     }
 });
-
-//avatar
 myBot.on('message', message => {
-    if (message.content === prefix + 'myAvatar'){
-        const embed = new Discord.RichEmbed();
-        embed.setColor(3446023)
-        .setImage(message.author.avatarURL)
- 
-        message.channel.send({embed: embed});
-        console.log("_myAvatar_ " + "utilisé par " + message.author.username);
-     }
-});
-myBot.on('message', message => {
-    if (message.content.startsWith('_avatar')) {
+    if (message.content.startsWith('/avatar')) {
         var mentionned = message.mentions.users.first();
         var autheur;
 
@@ -473,7 +272,6 @@ myBot.on('message', message => {
         console.log("[LOGS] AVATAR de " + autheur.username + " vient d'être récupérer par " + message.author.username)
     }
 });
-
 //interface
 myBot.on('message', message => {
     if (message.content === prefix + 'interface'){
@@ -483,60 +281,37 @@ myBot.on('message', message => {
        .setColor(3447003)
        .setDescription('les 22 meilleures commandes du bot:')
 
-       embed.addField('🍺 "_gifs"','permet de choisir un gif')
-       .addField('📡 "_bot"','permet de voir des liens pour rajouter le bot')
-       .addField('📃 "_programs"',"permet d'obtenir des liens plus ou moins en rapport avec la programmation")
-       .addField('🔒 "_admin"',"permet d'obtenir la liste des commandes de modération")
-       .addField('📎 "_myAvatar"',"permet d'obtenir l'image de son compte Discord")
-       .addField('🍸 "_cat1"','permet de choisir un gif chat')
-       .addField('📖 "_cat2"','permet de choisir un gif chat qui lit')
-       .addField('🎻 "_cat3"','permet de choisir le gif du chat botté')
-       .addField('🍯 "_dog1"','permet de choisir un gif chien')
-       .addField('⛲ "_fairy"','permet de choisir un gif chat')
-       .addField('😱 "_stoplesbetises"','permet de choisir un gif')
-       .addField('😂 "_mdr"','permet de choisir un gif mort de rire')
-       .addField('💿 "_rpg maker xp"',"permet d'obtenir un lien pour RPG Maker XP gratuit, cracké, FR")
-       .addField('📀 "_unity"',"permet d'obtenir un lien pour télécharger Unity")
-       .addField('📝 "_visual studio"',"permet d'obtenir un lien pour Visual Studio Code")
-       .addField('🎨 "_python"',"permet d'obtenir un lien pour Python")
-       .addField('😂 "_bot pc"',"permet d'obtenir un lien pour un tutoriel de création de bot sur pc")
-       .addField('😎 "_bot android"',"permet d'obtenir un lien pour un tutoriel de création de bot sur android")
-       .addField('📂 "_KOD2TOU"',"permet d'obtenir le lien du site de KOD2TOU")
-       .addField('🔪 "_clear"',"permet de clean le chat. Utilisation: //_clear + nombre entre 0 et 100 mais besoins de perms")
-       .addField('☢ "_ban"',"permet de ban un utilisateur")
-       .addField('🚫 "_kick"',"permet de éjecter un utilisateur")
+       embed.addField('🍺 "/gifs"','permet de choisir un gif')
+       .addField('📡 "/bot"','permet de voir des liens pour rajouter le bot')
+       .addField('🔒 "/admin"',"permet d'obtenir la liste des commandes de modération")
+       .addField('📎 "/avatar"',"permet d'obtenir l'image d'un' compte Discord")
+       .addField('🍸 "/cat1"','permet de choisir un gif chat')
+       .addField('📖 "/cat2"','permet de choisir un gif chat qui lit')
+       .addField('🎻 "/cat3"','permet de choisir le gif du chat botté')
+       .addField('🍯 "/dog1"','permet de choisir un gif chien')
+       .addField('⛲ "/fairy"','permet de choisir un gif chat')
+       .addField('😱 "/stoplesbetises"','permet de choisir un gif')
+       .addField('😂 "/mdr"','permet de choisir un gif mort de rire')
+       .addField('🔪 "/clear"',"permet de clean le chat. Utilisation: //_clear + nombre entre 0 et 100 mais besoins de perms")
+       .addField('☢ "/ban"',"permet de ban un utilisateur")
+       .addField('🚫 "/kick"',"permet de éjecter un utilisateur")
 
        message.channel.send({embed: embed});
     }
 });
-
-//serveurs
 myBot.on('message', message => {
     if (message.content === prefix + 'serveurs'){
         message.reply(`[LOGS] Connecté sur ${myBot.guilds.size} serveurs`);
     }
 });
-
-//exit
-myBot.on("message", message => {
-    if (message.content === '_exit') {
-      if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Vous n'avez pas la permission !");
-      console.log(`Commande .exit par ${message.author.tag}`);
-      msg.guild.leave().catch(e => {});
-}});
-
-//Bienvenue
 myBot.on("guildMemberAdd", member => {
     member.guild.channels.find("name", '👋bienvenue').send(` ${member.user.username}, 🎸**bienvenue**🎸 sur le serveur, n'hesite pas à 🍻**ramener des potes**🍻 et à *discuter avec le staff*`)
 });
-
-//Aurevoir
 myBot.on("guildMemberRemove", member => {
     member.guild.channels.find("name", '👋aurevoir').send(`😢C'est triste mais ${member.user.username} vien de quitter le serveur`)
 });
-//Personnes vérif
 myBot.on('message', message => {
-    if (message.content.startsWith('_infos')) {
+    if (message.content.startsWith('/infos')) {
         var mentionned = message.mentions.users.first();
         var autheur;
 
