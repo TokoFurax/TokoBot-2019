@@ -158,6 +158,12 @@ myBot.on('message', data => {
 }
 });
 myBot.on('message', data => {
+    if (data.content === prefix + 'toko'){
+    data.channel.send('https://www.picgifs.com/games-gifs/games-gifs/minecraft/picgifs-minecraft-1105739.gif');
+    console.log("_toko_");
+}
+});
+myBot.on('message', data => {
     if (data.content === prefix + 'ohhh'){
     data.channel.send('http://karinedreamsgraphic.k.a.pic.centerblog.net/Minions-Gif-pic1.gif');
     console.log("_ohhhhh_");
