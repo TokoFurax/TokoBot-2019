@@ -290,6 +290,6 @@ bot.on('message', message => {
     }
 })
 
-bot.login(config.TOKEN);
+bot.login("process.env.TOKEN");
 
 //https://discord.com/oauth2/authorize?client_id=802223183796633600&scope=bot&permissions=36826176
