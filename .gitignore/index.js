@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const Math = require('mathjs')
 const bot = new Discord.Client()
 
 var prefix = "a/";
@@ -7,10 +6,6 @@ var prefix2 = "oui/";
 var prefix3 = "nbr/";
 
 var prefixperso = "|";
-
-bot.on('ready', ready => {
-    console.log('Le VPN est start')
-})
 
 bot.on('message', message => {
     //copie
@@ -76,20 +71,6 @@ bot.on('message', message => {
             .setDescription(msg)
             message.channel.send(embed)
         }
-    }
-})
-
-bot.on('message', message => {
-    if(message.content.startsWith(prefix2)){
-        let tab = ['Oui','Non','Genre','Pas sûr','Je crois pas nan',"T'es sûre?","Mais oui c'est clair"]
-        let index = Math.floor(Math.random() * (tab.length))
-        message.channel.send(tab[index])
-    }
-
-    if(message.content.startsWith(prefix3)){
-        let tab = ['1','2','3','4','5',"6","7",'8','9','10','11','12',"13","14",'15','16','17','18','19',"20"]
-        let index = Math.floor(Math.random() * (tab.length))
-        message.channel.send(tab[index])
     }
 })
 
@@ -290,6 +271,6 @@ bot.on('message', message => {
     }
 })
 
-bot.login("process.env.TOKEN");
+bot.login(`${process.env.TOKEN}`);
 
 //https://discord.com/oauth2/authorize?client_id=802223183796633600&scope=bot&permissions=36826176
