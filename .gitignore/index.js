@@ -2,10 +2,7 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 
 var prefix = "a/";
-var prefix2 = "oui/";
-var prefix3 = "nbr/";
-
-var prefixperso = "|";
+var prefix2 = "oui/"
 
 bot.on('message', message => {
     //copie
@@ -40,36 +37,14 @@ bot.on('message', message => {
             .setImage(msg)
             .setColor('#00D166')
             channel.send(embed)
-        }else{
+        }
+        if(message.author.id === '809891861996240956'){
             let embed = new Discord.MessageEmbed()
             .setAuthor('Nord VPN')
             .setThumbnail(bot.user.displayAvatarURL())
             .setImage(msg)
             .setColor('#FFA500')
             channel.send(embed)
-        }
-    }
-})
-
-bot.on('message', message => {
-    if(message.content.startsWith(prefixperso) && message.author.id === '688299988908113992'){
-        let msg = message.content.slice(1);
-        message.delete()
-
-        if(message.content.endsWith('.jpg' || '.png' || '.gif')){
-            let embed = new Discord.MessageEmbed()
-            .setAuthor('Administrator')
-            .setColor('#00E5FF')
-            .setThumbnail('https://i.pinimg.com/originals/3f/1e/9c/3f1e9c7bbb0a0279ad11c98c08c2f648.jpg')
-            .setImage(msg)
-            message.channel.send(embed)
-        } else {
-            let embed = new Discord.MessageEmbed()
-            .setAuthor('Administrator')
-            .setColor('#00E5FF')
-            .setThumbnail('https://i.pinimg.com/originals/3f/1e/9c/3f1e9c7bbb0a0279ad11c98c08c2f648.jpg')
-            .setDescription(msg)
-            message.channel.send(embed)
         }
     }
 })
